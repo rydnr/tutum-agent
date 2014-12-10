@@ -8,7 +8,7 @@ RUN apt-get update \
 	apt-transport-https \
 	cgroup-bin \
 	curl \
-	linux-image-extra-$(uname -r) \
+	linux-image-extra-`uname -r` \
 	supervisor
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
