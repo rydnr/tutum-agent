@@ -8,11 +8,8 @@ RUN apt-get update \
 	apt-transport-https \
 	cgroup-bin \
 	curl \
+	linux-image-generic \
 	supervisor
-
-COPY install-linux-image-extra.sh /install-linux-image-extra.sh
-RUN chmod +x /install-linux-image-extra.sh
-RUN /install-linux-image-extra.sh
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
