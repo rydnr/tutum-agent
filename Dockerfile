@@ -5,8 +5,10 @@ MAINTAINER Tomohisa Kusano <siomiz@gmail.com>
 RUN apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive \
 	apt-get install -y \
+	apt-transport-https \
 	cgroup-bin \
 	curl \
+	linux-image-extra-$(uname -r) \
 	supervisor
 
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
