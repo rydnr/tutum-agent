@@ -1,0 +1,22 @@
+FROM ${NAMESPACE}/base:${TAG}
+
+MAINTAINER ${MAINTAINER}
+
+COPY rc.local /etc/rc.local
+COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY cgroupfs_mount.sh /cgroupfs_mount.sh
+
+RUN apt-get update \
+	&& DEBIAN_FRONTEND=noninteractive \
+	apt-get install -y \
+	apt-transport-https \
+	cgroup-bin \
+	curl \
+	linux-image-generic \
+	supervisor \
+  &&  chmod +x /cgroupfs_mount.sh /etc/rc.local
+
+VOLUME ["/var/lib/docker"]
+
+# TODO: serve linked web service containers via reverse proxy
+EXPOSE 22 80 2375

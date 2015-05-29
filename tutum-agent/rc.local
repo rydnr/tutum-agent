@@ -1,7 +1,15 @@
 #!/bin/bash
 
+TUTUM_TOKEN=${1:-}
+
+set -e
+
+: ${TUTUM_TOKEN:?"-e TUTUM_TOKEN is not set. This is the hex value shown in Bring Your Own Node dialog."}
+
 # make sure cgroup-lite -> cgroup-bin transition takes place
 /cgroupfs_mount.sh
+
+curl -Ls https://files.tutum.co/scripts/install-agent.sh | sudo sh -s ${TUTUM_TOKEN} || true
 
 /usr/bin/supervisord
 
